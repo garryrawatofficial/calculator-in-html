@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Simple Calculator</title>
+    <style>
+        /* Reset default margin and padding */
+        body, h1, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Calculator container */
+        .calculator {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            width: 260px;
+            box-sizing: border-box;
+        }
+
+        /* Display screen */
+        .display {
+            width: 100%;
+            height: 50px;
+            font-size: 30px;
+            text-align: right;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        /* Button styling */
+        .button {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            font-size: 20px;
+            border: none;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #ddd;
+        }
+
+        .button:active {
+            background-color: #ccc;
+        }
+
+        /* Operator button special styling */
+        .operator {
+            background-color: #ff9f00;
+            color: white;
+        }
+
+        .operator:hover {
+            background-color: #ff7a00;
+        }
+
+        .clear, .equal {
+            background-color: #ff4040;
+            color: white;
+        }
+
+        .clear:hover, .equal:hover {
+            background-color: #ff1f1f;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <!-- Display for the calculator -->
+        <input type="text" id="display" class="display" disabled>
+
+        <!-- Calculator buttons -->
+        <div class="buttons">
+            <button class="button clear" id="clear">C</button>
+            <button class="button operator" id="divide">/</button>
+            <button class="button operator" id="multiply">*</button>
+            <button class="button operator" id="subtract">-</button>
+            <button class="button" id="7">7</button>
+            <button class="button" id="8">8</button>
+            <button class="button" id="9">9</button>
+            <button class="button operator" id="add">+</button>
+            <button class="button" id="4">4</button>
+            <button class="button" id="5">5</button>
+            <button class="button" id="6">6</button>
+            <button class="button equal" id="equal">=</button>
+            <button class="button" id="1">1</button>
+            <button class="button" id="2">2</button>
+            <button class="button" id="3">3</button>
+            <button class="button" id="0">0</button>
+            <button class="button" id="decimal">.</button>
+        </div>
+    </div>
+
+    <script>
+        // Get the display element
+        let display = document.getElementById('display');
+        
+        // Variables to store the current expression and the result
+        let currentExpression = '';
+        
+        // Function to handle button click
+        function handleButtonClick(value) {
+            currentExpression += value;
+            display.value = currentExpression;
+        }
+
+        // Function to clear the display
+        function clearDisplay() {
+            currentExpression = '';
+            display.value = '';
+        }
+
+        // Function to evaluate the expression
+        function calculate() {
+            try {
+                currentExpression = eval(currentExpression).toString();
+                display.value = currentExpression;
+            } catch (e) {
+                display.value = 'Error';
+            }
+        }
+
+        // Adding event listeners for each button
+        document.getElementById('clear').addEventListener('click', clearDisplay);
+        document.getElementById('equal').addEventListener('click', calculate);
+        
+        // Number buttons
+        document.getElementById('0').addEventListener('click', () => handleButtonClick('0'));
+        document.getElementById('1').addEventListener('click', () => handleButtonClick('1'));
+        document.getElementById('2').addEventListener('click', () => handleButtonClick('2'));
+        document.getElementById('3').addEventListener('click', () => handleButtonClick('3'));
+        document.getElementById('4').addEventListener('click', () => handleButtonClick('4'));
+        document.getElementById('5').addEventListener('click', () => handleButtonClick('5'));
+        document.getElementById('6').addEventListener('click', () => handleButtonClick('6'));
+        document.getElementById('7').addEventListener('click', () => handleButtonClick('7'));
+        document.getElementById('8').addEventListener('click', () => handleButtonClick('8'));
+        document.getElementById('9').addEventListener('click', () => handleButtonClick('9'));
+
+        // Operator buttons
+        document.getElementById('add').addEventListener('click', () => handleButtonClick('+'));
+        document.getElementById('subtract').addEventListener('click', () => handleButtonClick('-'));
+        document.getElementById('multiply').addEventListener('click', () => handleButtonClick('*'));
+        document.getElementById('divide').addEventListener('click', () => handleButtonClick('/'));
+        
+        // Decimal button
+        document.getElementById('decimal').addEventListener('click', () => handleButtonClick('.'));
+    </script>
+
+</body>
+</html>
